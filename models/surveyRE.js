@@ -64,7 +64,7 @@ const surveyRESchema = new mongoose.Schema({
         {
             pregunta: {
                 type:mongoose.Schema.ObjectId,
-                ref: 'dictionaryDAE'
+                ref: 'dictionaryRE'
             },
             respuesta: {
                 type: String,
@@ -83,5 +83,6 @@ surveyRESchema.pre('find', function(next) {
     });
     next();
 });
+
 const SurveyDAE = mongoose.model("surveyRE",surveyRESchema);
 module.exports = SurveyDAE;
