@@ -4,6 +4,9 @@ const multer = require('multer');
 const xlsx = require('xlsx');
 const DictionaryDAE = require('../models/dictionaryDAE');
 const SurveyDAE = require('../models/surveyDAE');
+const DictionaryRE = require('../models/dictionaryRE');
+const SurveyRE = require('../models/surveyRE');
+
 const AppError = require('../utils/AppError')
 const { getAll } = require('./handleFactory');
 //#region Configuracion de multer
@@ -1225,7 +1228,11 @@ const getAllSurveysDAE = getAll(SurveyDAE);
 const deleteAllSurveysDAEAndDeleteAllDictionary = catchAsync(async(req,res,next)=>{
   const wait = await DictionaryDAE.deleteMany({});
   const wait2 = await SurveyDAE.deleteMany({});
-  if(wait.acknowledged === true && wait2.acknowledged === true){
+  const wait3 = await DictionaryRE.deleteMany({});
+  const wait4 = await SurveyRE.deleteMany({});
+
+  if(wait.acknowledged === true && wait2.acknowledged === true &&
+    wait3.acknowledged === true && wait4.acknowledged === true){
     return res.status(204).json({status: "successful", message: "Documentos eliminados" }); 
   }
   return next(new AppError("Hubo un error al elimnar los datos",400)); 

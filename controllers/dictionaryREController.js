@@ -35,6 +35,8 @@ const { getAll } = require('./handleFactory');
 //Guardamos el excel, debido a que recibimos el buffer 
 const saveExcel = catchAsync(async(req,res,next)=>{
     //Validamos si existe el excel
+    console.log(req.files)
+    console.log(req.file)
     if(!req.files.excelDictionaryRE) return next(new AppError("No existe el excel",400)); 
     const fileName= `excel-${Date.now()}.xlsx`;
     const route = `${__dirname}/../public/servidor/Encuestas/Egreso/${fileName}`;
