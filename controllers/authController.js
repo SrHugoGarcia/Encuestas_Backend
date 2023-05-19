@@ -62,7 +62,7 @@ const login =catchAsync(async(req,res,next)=>{
     const usuario = await User.findOne({cuenta}).select(' -__v +password');
     console.log(usuario)
     if(!usuario || !await usuario.correctaContraseña(password, usuario.password)){
-        return next(new AppError("Incorrecta cuenta o password",401))
+        return next(new AppError("La cuenta o contraseña ingresada es incorrecta. Por favor, inténtalo nuevamente.",401))
     }
    
     const user = await User.findOne({cuenta})
