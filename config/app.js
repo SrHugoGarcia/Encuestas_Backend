@@ -26,8 +26,8 @@ app.use((req,res,next) =>{
     req.requestTime = new Date().toISOString();
     next();
 })
-
-const whileList = [process.env.FRONTEND_URL2, process.env.FRONTEND_URL];
+/*
+const whileList = ["http://localhost:6969", "http://127.0.0.1:6969"];
 const corsOptions = {
     origin: function (origin, callback) {
       if(whileList.includes(origin)){
@@ -38,7 +38,7 @@ const corsOptions = {
     },    
     credentials: true
   }
-app.use(cors(corsOptions))
+app.use(cors(corsOptions))*/
 
 app.use("/api/v1/surveyDAE",surveyDAERoutes);
 app.use("/api/v1/surveyRE",surveyRERoutes);

@@ -6,8 +6,8 @@ const { promisify } = require('util');
 const catchAsync = require('../utils/CatchAsync');
 
 const signToken = id =>{
-    return jwt.sign({id: id},process.env.JWT_SECRET,{
-        expiresIn: process.env.JWT_EXPIRE_IN
+    return jwt.sign({id: id},"caregobi-Uaemex$va",{
+        expiresIn:"1d"
     });
 }
 
@@ -20,7 +20,7 @@ const createSendToken =(user,statusCode,req,res)=>{
         secure: true,
         //secure:  req.secure || req.headers['x-forwarded-proto'] === 'https',
         expires: new Date (
-        Date.now () + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+        Date.now () + 1 * 24 * 60 * 60 * 1000
         ),
         sameSite: 'none',
     }

@@ -4,7 +4,8 @@ const conexionDB =async ()=>{
     /*useNewUrlParser, useUnifiedTopology, useFindAndModifyy useCreateIndex ya no son opciones 
     compatibles. Mongoose 6 siempre se comporta como si useNewUrlParser, useUnifiedTopologyy 
     useCreateIndexfueran truey useFindAndModifyes false.*/
-    const db = process.env.DATABASE.replace('<PASSWORD>',process.env.DATABASE_PASSWORD);
+    //const db = process.env.DATABASE.replace('<PASSWORD>',process.env.DATABASE_PASSWORD);
+    const db = "mongodb+srv://david:cyFErbnSHCgCRukB@escuelacluster.luu8rfy.mongodb.net/Surveys?retryWrites=true&w=majority";
     //Parametros(conexionDataBase,{configuracion})).La promesa(nos regresa algo)
     await  mongoose.connect(db,{
         useNewUrlParser: true,
