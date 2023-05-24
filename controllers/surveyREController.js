@@ -34,27 +34,24 @@ const { getAll } = require('./handleFactory');
 
 //Guardamos el excel, debido a que recibimos el buffer 
 const saveExcel = catchAsync(async(req,res,next)=>{
+  console.log(req.files)
+
     //Validamos si existe el excel
     if(!req.files.excelEncuestaRE) return next(new AppError("No existe el excel",400)); 
     const fileName= `excel-${Date.now()}.xlsx`;
     const route = `${__dirname}/../public/servidor/Encuestas/Egreso/${fileName}`;
     const buffer = req.files.excelEncuestaRE[0].buffer;
-    const wait = await new Archivo(route,buffer).createFile()
-        .then(res =>{ return {status: "successful"}})
-            .catch(err=>{ return "error" });
-    if(wait == "error" || wait.status!= "successful") return next(new AppError("Error al guardar el excel",400)); 
-    req.body.excel= { fileName,route,content: "" };
+    req.body.excel= { fileName,route,content: buffer };
     next();
 });
 
 //Leer el excel 
 const readExcel = catchAsync(async(req,res,next)=>{
-    const excel = xlsx.readFile(req.body.excel.route);
+    const excel = xlsx.read(req.body.excel.content, { type: "buffer" });
     if(!excel) return next(new AppError("No se pudo leer el excel",400));
     req.body.excel.content = excel;
     next();
 });
-
 const eliminateExcel = catchAsync(async(req,res,next)=>{
     const wait =await new Archivo(req.body.excel.route,"").eliminateFile()
         .then(res =>{ return "successful" })

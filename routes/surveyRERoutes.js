@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.route("/delete-all").delete(protect,restrictTo("user", "admin"),deleteAllSurveysRE);
 
-router.route("/").post(protect,restrictTo("user", "admin"),validateSurveysREExists,uploadExcel,saveExcel, readExcel, eliminateExcel, extractData, saveDataSurveyRE).get(getAllSurveysRE);
+router.route("/").post(protect,restrictTo("user", "admin"),validateSurveysREExists,uploadExcel,saveExcel, readExcel, extractData, saveDataSurveyRE).get(getAllSurveysRE);
 
 
 module.exports = router;

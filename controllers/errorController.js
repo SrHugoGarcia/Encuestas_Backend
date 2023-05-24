@@ -64,9 +64,9 @@ const erroresGlobales = (err,req,res,next)=>{
     //En dado caso que no tenga el status por default sea 500
     err.statusCode = err.statusCode || 500;
     err.status = err.status || 'error';
-    if(process.env.NODE_ENV === "development"){
+    if(false){
         sendErrorDev(err,res);
-    }else if(process.env.NODE_ENV === "production"){
+    }else if(true){
        //Copia del parametro de error
        let error = err;
        //console.log(error.name);

@@ -24,6 +24,7 @@ const createSendToken =(user,statusCode,req,res)=>{
         ),
         sameSite: 'none',
     }
+    console.log("Cokieee")
     user.password = undefined;
     res.cookie('jwt',token,cookieOptions);
     /*res.cookie('checkToken', true, {
@@ -82,15 +83,19 @@ const cerrarSesion =(req,res)=>{
 //Protejemos nuestras rutas, verificando si la persona es un usuario
 const protect =catchAsync(async(req,res,next)=>{
     let token;
+    console.log("Inicia")
     //1)Traer el token y verificar si existe
         if(req.headers.authorization && req.headers.authorization.startsWith("Bearer")){
+            console.log("TOKEN")
             token = req.headers.authorization.split(" ")[1];
         }else if(req.cookies.jwt){
+            console.log("COOKIE")
             token = req.cookies.jwt;
         }
+        console.log("Termina")
     if(!token) return next(new AppError("Tu no has iniciado sesion, porfavor inicia sesion para obtener el acceso",401));
     //2) Verificar si el token es valido
-    const decoded = await promisify(jwt.verify)(token,process.env.JWT_SECRET);
+    const decoded = await promisify(jwt.verify)(token,"caregobi-Uaemex$va");
     //3) Verificar si el usuario existe
     const user = await User.findById(decoded.id)
     if(!user) return next(new AppError("el usuario que pertenece a este token ya no existe",404));

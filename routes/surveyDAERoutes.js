@@ -19,7 +19,7 @@ router.route("/percentage-professional-training-work-relation-ship-level").get(p
 router.route("/percentage-majority-legal-regime").get(protect,restrictTo("user", "admin"),percentageMajorityLegalRegime);
 router.route("/percentage-importance-of-english-in-hiring").get(protect,restrictTo("user", "admin"),percentageImportanceOfEnglishInHiring);
 router.route("/delete-all-surveysDAE-and-delete-all-dictionary").delete(protect,restrictTo("user", "admin"),deleteAllSurveysDAEAndDeleteAllDictionary)
-router.route("/").post(protect,restrictTo("user", "admin"),validateSurveysDAEExists,uploadExcel,saveExcel, readExcel, eliminateExcel, extractData, saveDataSurveyDAE).get(getAllSurveysDAE);
+router.route("/").post(protect,restrictTo("user", "admin"),validateSurveysDAEExists,uploadExcel,saveExcel, readExcel, extractData, saveDataSurveyDAE).get(getAllSurveysDAE);
 
 
 module.exports = router;
